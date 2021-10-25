@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme. -->
+
+    <style name="buttonstyle1" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/gray</item>
+        <item name="colorButtonNormal">@color/white</item>
+    </style>
+
+
+    <style name="buttonstyle3" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/gray</item>
+        <item name="colorButtonNormal">@color/white</item>
+
+
+    </style>
+</resources>
