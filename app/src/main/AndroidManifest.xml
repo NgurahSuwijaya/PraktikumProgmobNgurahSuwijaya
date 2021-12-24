@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PraktikumProgmobNgurahSuwijaya">
         <activity
+            android:name=".DoneActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AddQuestActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AppActivity"
+            android:exported="true" />
+        <activity
             android:name=".DashboardActivity"
             android:exported="true" />
         <activity

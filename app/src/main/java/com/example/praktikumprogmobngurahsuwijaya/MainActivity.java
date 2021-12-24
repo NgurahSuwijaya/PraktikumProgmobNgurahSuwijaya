@@ -3,6 +3,7 @@ package com.example.praktikumprogmobngurahsuwijaya;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -29,15 +30,12 @@ public class MainActivity extends AppCompatActivity{
     RadioButton male, female;
     Button btnSubmit, btnBackDialog, btnSubmitDialog;
     SeekBar seekBar;
-//    static DataHelper dbcenter;
-    Cursor cursor;
+    DataHelper db;
     String sRole;
     String valueSeek;
     String sName;
     String sGender;
     String sPass;
-    String SQLiteQuery;
-    SQLiteDatabase sqLiteDatabase;
 
 
     @Override
@@ -45,7 +43,7 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        dbcenter = new DataHelper(MainActivity.this);
+        db = new DataHelper(this);
         seekMeter = findViewById(R.id.textViewSeekMeter);
 
         name = findViewById(R.id.editTextName);
@@ -62,13 +60,6 @@ public class MainActivity extends AppCompatActivity{
 
         btnSubmit = findViewById(R.id.buttonSubmitDialog);
         seekBar  = findViewById(R.id.seekBar);
-
-        sqLiteDatabase = openOrCreateDatabase("db_praktikum",
-                Context.MODE_PRIVATE, null);
-
-        sqLiteDatabase.execSQL("create table " +
-                "IF NOT EXISTS tb_user (id integer primary key autoincrement not null," +
-                " name text, password text, gender text,role text,range_play text);");
 
         //seek bar
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -120,16 +111,6 @@ public class MainActivity extends AppCompatActivity{
                     }
                     alertDialog();
 
-//                    SQLiteDatabase db = dbcenter.getWritableDatabase();
-//                    db.execSQL("insert into user(id, name, password, gender, role, range_play) values('" +
-//                            name + '","'+
-//                            password +'","' +
-//                            gender +'","'+
-//                            role )";
-//
-//
-//
-//                    pst.setString(5, role.toString());
                 }
             }
         });
@@ -180,10 +161,17 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-//                MainActivity.dbcenter.insertUser(sName.trim(), sPass.trim(), sGender.trim(), sRole.trim(), valueSeek.trim());
-
 
                 Toast.makeText(MainActivity.this,"Registration Successfully",Toast.LENGTH_SHORT).show();
+
+                ContentValues values = new ContentValues();
+                values.put(DataHelper.row_username, sName);
+                values.put(DataHelper.row_pass, sPass);
+                values.put(DataHelper.row_gender, sGender);
+                values.put(DataHelper.row_role, sRole);
+                values.put(DataHelper.row_range, valueSeek);
+
+                DataHelper.insertPlayer(values);
 
                 Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
                 intent.putExtra("name", sName);
@@ -192,10 +180,6 @@ public class MainActivity extends AppCompatActivity{
                 intent.putExtra("range", valueSeek);
                 startActivity(intent);
 
-                SQLiteQuery = "INSERT INTO tb_user (name, password, " +
-                        "gender, role, range_play) VALUES('" + sName + "', '" + sPass + "', " +
-                        "'" + sGender + "','"+sRole+"', '" + valueSeek + "');";
-                sqLiteDatabase.execSQL(SQLiteQuery);
             }
         });
 

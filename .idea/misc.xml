@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/User/AndroidStudioProjects/PraktikumProgmobNgurahSuwijaya/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PraktikumProgmobNgurahSuwijaya/app/src/main/res/drawable-v24/ic_overflow.xml" value="0.2301801801801802" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PraktikumProgmobNgurahSuwijaya/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PraktikumProgmobNgurahSuwijaya/app/src/main/res/drawable/kotak.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PraktikumProgmobNgurahSuwijaya/app/src/main/res/drawable/kotakno.xml" value="0.2382882882882883" />
@@ -11,9 +12,15 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/PraktikumProgmobNgurahSuwijaya/app/src/main/res/drawable/layout1.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PraktikumProgmobNgurahSuwijaya/app/src/main/res/drawable/layout2.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PraktikumProgmobNgurahSuwijaya/app/src/main/res/drawable/square.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PraktikumProgmobNgurahSuwijaya/app/src/main/res/layout/activity_add_quest.xml" value="0.21621621621621623" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PraktikumProgmobNgurahSuwijaya/app/src/main/res/layout/activity_app.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PraktikumProgmobNgurahSuwijaya/app/src/main/res/layout/activity_dashboard.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PraktikumProgmobNgurahSuwijaya/app/src/main/res/layout/activity_done.xml" value="0.21621621621621623" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PraktikumProgmobNgurahSuwijaya/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PraktikumProgmobNgurahSuwijaya/app/src/main/res/layout/activity_recycler.xml" value="0.1481981981981982" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PraktikumProgmobNgurahSuwijaya/app/src/main/res/layout/add_dialog.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PraktikumProgmobNgurahSuwijaya/app/src/main/res/layout/confirm_dialog.xml" value="0.22432432432432434" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PraktikumProgmobNgurahSuwijaya/app/src/main/res/layout/row_recycler.xml" value="0.264" />
       </map>
     </option>
   </component>

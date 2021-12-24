@@ -1,5 +1,6 @@
 package com.example.praktikumprogmobngurahsuwijaya;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,55 +11,87 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 public class DataHelper extends SQLiteOpenHelper {
-    Context Context;
-    private static final String DATABASE_NAME = "db_praktikum";
-    private static final int DATABASE_VERSION = 1;
+    private static final String database_name = "db_praktikum_DTR";
+
+    public static final String table_name_player = "tb_player";
+    public static final String row_id_player = "id";
+    public static final String row_username = "username";
+    public static final String row_name = "name";
+    public static final String row_pass = "password";
+    public static final String row_gender = "gender";
+    public static final String row_role = "role";
+    public static final String row_range = "range";
+
+    public static final String row_id_quest = "id_quest";
+    public static final String table_name_quest = "tb_quest";
+    public static final String row_player = "player_id";
+    public static final String row_quest = "quest";
+    public static final String row_role_quest = "role_quest";
+    public static final String row_status = "status_quest";
+
+    private static SQLiteDatabase db;
+    private Context context;
 
     public DataHelper(@Nullable Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, database_name, null, 1);
+        db = getWritableDatabase();
+        this.context = context;
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String sqlite = "create table tb_user (id integer primary key autoincrement not null, name text, password text, gender text,role text,range_play text);";
-        Log.d("data", "onCreate:"+sqlite);
-        sqLiteDatabase.execSQL(sqlite);
+    public void onCreate(SQLiteDatabase db) {
+        String query = "CREATE TABLE " + table_name_player + "(" + row_id_player + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + row_username + " TEXT," + row_name + " TEXT," + row_pass + " TEXT," + row_gender + " TEXT," + row_role + " TEXT," + row_range + " TEXT)";
+
+        String query_contact = "CREATE TABLE " + table_name_quest + "(" + row_id_quest + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + row_player + " INTEGER," + row_quest + " TEXT," + row_role_quest + " TEXT, " + row_status + " TEXT)";
+        db.execSQL(query);
+        db.execSQL(query_contact);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + table_name_player);
+        db.execSQL("DROP TABLE IF EXISTS " + table_name_quest);
     }
 
-    public boolean insertUser(String name_in, String password_in, String gender_in,String role_in, String range_play_in ){
-       try {
-           String sqlite = "INSERT INTO tb_user (name, password, gender, role, range_play) VALUES('" + name_in + "', '" + password_in + "', '" + gender_in + "', '" + role_in + "', '" + range_play_in + "');";
-           SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-           sqLiteDatabase.execSQL(sqlite);
-           Toast.makeText(Context, "Berhasil add data",
-                   Toast.LENGTH_SHORT).show();
-           return true;
-       }catch (Exception e){
-           return false;
-       }
+    public static void insertPlayer(ContentValues values){
+        db.insert(table_name_player, null, values);
     }
 
-    public Cursor showData(){
-        try{
-            String sql = "SELECT * FROM tb_orang";
-            SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-            Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
-            return cursor;
-        }catch (Exception e){
-            return null;
+    public static void insertQuest(ContentValues values){
+        db.insert(table_name_quest, null, values);
+    }
+
+    public Cursor readAllData(){
+        String sql = "select * from " + table_name_quest;
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(sql, null);
+        }
+        return cursor;
+    }
+    void updateData(String row_id, String quest, String role, String status){
+        ContentValues cv = new ContentValues();
+        cv.put(row_quest, quest);
+        cv.put(row_role_quest, role);
+        cv.put(row_status, status);
+
+        long result = db.update(table_name_quest, cv, "id_quest=?", new String[]{row_id});
+        if(result == -1){
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
         }
     }
-
-//    public void readUser( String name, String alamat, int usia, String gender ){
-//        String sqlite = "INSERT INTO tb_user(name, password, gender, role, range_play) VALUES(name, password, gender, role, range_play);";
-//        SQLiteDatabase db = getWritableDatabase();
-//        db.execSQL(sqlite);
-//        Toast.makeText(Context,"Berhasil add data",
-//                Toast.LENGTH_SHORT).show();
-//    }
+    void deleteOneRow(String row_id){
+        long result = db.delete(table_name_quest, "id_quest=?", new String[]{row_id});
+        if(result == -1){
+            Toast.makeText(context, "Failed to Delete.", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context, "Successfully Deleted.", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

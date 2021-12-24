@@ -6,17 +6,18 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EdgeEffect;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class DashboardActivity extends AppCompatActivity {
-    DataHelper dataHelper;
-    protected Cursor cursor;
     EditText dName, dRole, dPlaytime;
     TextView dNameTitle;
     String sName, sRole, sPlaytime, sGender;
+    Button btnSave, btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,8 @@ public class DashboardActivity extends AppCompatActivity {
         dRole = findViewById(R.id.editTextDRoleIn);
         dPlaytime = findViewById(R.id.editTextDPlayTimeIn);
         dNameTitle = findViewById(R.id.textViewDName);
+        btnLogout = findViewById(R.id.buttonLogout);
+        btnSave = findViewById(R.id.buttonSave);
 
         Intent intent = getIntent();
 
@@ -35,17 +38,18 @@ public class DashboardActivity extends AppCompatActivity {
         sRole = intent.getStringExtra("role");
         sPlaytime = intent.getStringExtra("range");
 
-
-
-//        DataHelper dataHelper = new DataHelper(DashboardActivity.this);
-//        SQLiteDatabase sqLiteDatabase = dataHelper.getReadableDatabase();
-//        cursor = sqLiteDatabase.rawQuery("SELECT * FROM tb_mhs WHERE nim = 1 '" +
-//                getIntent().getStringExtra("MainNim") + "'", null);
-        dName.setText("Input Ur Full Name Pls");
+        dName.setText(sName);
         dRole.setText(sRole);
         dPlaytime.setText(sPlaytime);
         dNameTitle.setText(sName);
 
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(DashboardActivity.this, AppActivity.class);
+                startActivity(intent2);
+            }
+        });
     }
 
     @Override
